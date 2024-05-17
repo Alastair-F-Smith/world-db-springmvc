@@ -1,5 +1,5 @@
 <h1>World-DB-Spring-REST</h1>
-World-DB-Spring 'Elite Seven' consisting of Howard, Patrick W, Patrick S, Selam, Alistar, Alex and Phoenix 👋.
+World-DB-Spring 'Elite Seven' consisting of Howard, Patrick W, Patrick S, Selam, Alastair, Alex and Phoenix 👋.
 
 ## Project Overview
 This project creates a Java applicaiton that uses an SQL database which contains a list of countries and cities, along with other details.
@@ -107,6 +107,11 @@ Open the project directory: "Dungeons and Debuggerss" and open the class "App". 
     <artifactId>springdoc-openapi-starter-webflux-ui</artifactId>
     <version>2.1.0</version>
         </dependency>
+```
+
+Run this:
+```
+http://localhost:8080/swagger-ui/index.html
 ```
 In order for swagger to work with Spring WebFlux application ensure that springdoc-openapi-webflux depdency is inside the pom.xml file. For more information on how to install swagger onto your project please use the following guide:
 <br></br>

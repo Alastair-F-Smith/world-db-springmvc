@@ -13,7 +13,7 @@ public class CountryLanguageEntity {
     private CountryLanguageEntityId id;
 
     @MapsId("countryCode")
-    @ManyToOne(fetch = FetchType.EAGER, optional = false)
+    @ManyToOne(fetch = FetchType.EAGER, optional = false, cascade = CascadeType.MERGE)
     @ColumnDefault("''")
     @JoinColumn(name = "CountryCode", nullable = false)
     private CountryEntity countryCode;
