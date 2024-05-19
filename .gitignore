@@ -45,4 +45,3 @@ out/
 ### Mac OS ###
 .DS_Store
 *.properties
-pom.xml
