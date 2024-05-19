@@ -16,7 +16,7 @@ import org.springframework.web.reactive.function.BodyInserters;
 
 import static org.junit.jupiter.api.Assertions.fail;
 
-@SpringBootTest
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.DEFINED_PORT)
 public class CityControllerTests {
 
     WebTestClient webTestClient;
@@ -26,6 +26,7 @@ public class CityControllerTests {
 
     @BeforeEach
     public void setUp() {
+//        webTestClient = WebTestClient.bindToController(cityController).build();
         webTestClient = WebTestClient.bindToServer().baseUrl("http://localhost:8080").build();
     }
 
