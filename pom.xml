@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>org.example</groupId>
-    <artifactId>DungeonsAndDebugerss</artifactId>
+    <artifactId>WorldDBSpringMVC</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>DungeonsAndDebugerss</name>
-    <description>DungeonsAndDebugerss</description>
+    <name>WorldDBSpringMVC</name>
+    <description>WorldDBSpringMVC</description>
     <properties>
         <java.version>21</java.version>
     </properties>
