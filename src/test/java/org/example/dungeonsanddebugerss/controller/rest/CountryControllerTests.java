@@ -1,18 +1,15 @@
-package org.example.dungeonsanddebugerss.controller;
+package org.example.dungeonsanddebugerss.controller.rest;
 
-import org.example.dungeonsanddebugerss.controllers.CountryController;
-import org.example.dungeonsanddebugerss.model.entities.CityEntity;
+import org.example.dungeonsanddebugerss.controllers.rest.CountryController;
 import org.example.dungeonsanddebugerss.model.entities.CountryEntity;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.test.web.reactive.server.WebTestClient;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.reactive.function.BodyInserters;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import java.math.BigDecimal;
 

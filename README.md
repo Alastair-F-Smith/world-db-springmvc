@@ -1,5 +1,5 @@
-<h1>World-DB-Spring-REST</h1>
-World-DB-Spring 'Elite Seven' consisting of Howard, Patrick W, Patrick S, Selam, Alastair, Alex and Phoenix 👋.
+<h1>World-DB-Spring-MVC</h1>
+World-DB-Spring-MVC team consisting of Howard, Patryk S, Selam, Alastair, and Phoenix 👋.
 
 ## Project Overview
 This project creates a Java applicaiton that uses an SQL database which contains a list of countries and cities, along with other details.

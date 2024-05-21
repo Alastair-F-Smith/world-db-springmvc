@@ -1,4 +1,4 @@
-package org.example.dungeonsanddebugerss.controllers;
+package org.example.dungeonsanddebugerss.controllers.rest;
 
 import org.example.dungeonsanddebugerss.model.entities.CountryLanguageEntity;
 import org.example.dungeonsanddebugerss.model.entities.CountryLanguageEntityId;

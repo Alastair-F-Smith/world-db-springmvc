@@ -1,10 +1,9 @@
-package org.example.dungeonsanddebugerss.controllers;
+package org.example.dungeonsanddebugerss.controllers.rest;
 
 import jakarta.validation.Valid;
 import org.example.dungeonsanddebugerss.model.entities.CountryEntity;
 import org.example.dungeonsanddebugerss.model.exception.CountryCodeDoesNotExistException;
 import org.example.dungeonsanddebugerss.model.exception.CountryIsNullException;
-import org.example.dungeonsanddebugerss.model.exception.CountryNotFoundException;
 import org.example.dungeonsanddebugerss.model.exception.KeyNotFoundException;
 import org.example.dungeonsanddebugerss.service.CountryService;
 import org.springframework.beans.factory.annotation.Autowired;
