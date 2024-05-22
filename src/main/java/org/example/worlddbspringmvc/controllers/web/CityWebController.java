@@ -58,7 +58,7 @@ public class CityWebController {
     public String saveCity(@RequestParam String name,
                            @RequestParam String countryCode,
                            @RequestParam String district,
-                           @RequestParam int population) {
+                           @RequestParam int population) throws CountryNotFoundException {
         CountryEntity country = countryService.getCountryByCode(countryCode).orElseThrow(()->new CountryNotFoundException("Country not found"));
         CityEntity city = new CityEntity();
         city.setName(name);
