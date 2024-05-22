@@ -54,10 +54,26 @@ public class CityWebController {
         return "addCity";
     }
 
+    @PostMapping("/city/save")
+    public String saveCity(@RequestParam String name,
+                           @RequestParam String countryCode,
+                           @RequestParam String district,
+                           @RequestParam int population) {
+        CountryEntity country = countryService.getCountryByCode(countryCode).orElseThrow(()->new CountryNotFoundException("Country not found"));
+        CityEntity city = new CityEntity();
+        city.setName(name);
+        city.setCountryCode(country);
+        city.setDistrict(district);
+        city.setPopulation(population);
+        cityService.createCity(city);
+        return "redirect:/cities";
+    }
+
     @GetMapping("/city/edit/{id}")
     public String editCity(@PathVariable int id, Model model) throws CityDoesNotExistException {
         CityEntity city = cityService.getCityById(id).orElseThrow(()->new CityDoesNotExistException(""));
         model.addAttribute("city", city);
+        model.addAttribute("countries", countryService.getAllCountries());
         return "editCity";
     }
 
