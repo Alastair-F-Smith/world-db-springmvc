@@ -41,7 +41,7 @@ public class CityWebController {
     }
 
     @GetMapping("/city/delete/{id}")
-    public String deleteCityById(@PathVariable int id, Model model) {
+    public String deleteCityById(@PathVariable int id) {
         cityService.deleteCity(id);
         return "redirect:/cities";
     }
