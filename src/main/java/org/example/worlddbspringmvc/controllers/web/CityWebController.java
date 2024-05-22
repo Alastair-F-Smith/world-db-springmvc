@@ -13,22 +13,18 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 public class CityWebController {
 
-    private final CityEntityRepository cityEntityRepository;
     private final CityService cityService;
     private final CountryService countryService;
 
-    public CityWebController(CityEntityRepository cityEntityRepository, CityService cityService, CountryService countryService) {
-        this.cityEntityRepository = cityEntityRepository;
+    public CityWebController(CityService cityService, CountryService countryService) {
         this.cityService = cityService;
         this.countryService = countryService;
     }
 
-//    @RequestMapping(path = {"/cities","/cityNameContains"})
     @RequestMapping("/cities")
     public String getCities(String cityName, Model model){
         if(cityName == null){
@@ -70,8 +66,7 @@ public class CityWebController {
                              @RequestParam("countryCode") String countryCode,
                              @RequestParam("district") String district,
                              @RequestParam("population") int population,
-                             @PathVariable int id,
-                             Model model) throws CountryNotFoundException {
+                             @PathVariable int id) throws CountryNotFoundException {
         CountryEntity country = countryService.getCountryByCode(countryCode).orElseThrow(() -> new CountryNotFoundException(countryCode));
 
         CityEntity newCity = new CityEntity();
