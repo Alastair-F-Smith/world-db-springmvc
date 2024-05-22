@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Languages</title>
+</head>
+<body>
+<table>
+    <thead>
+    <tr>
+        <th>Country Code</th>
+        <th>Language</th>
+        <th>Is Official?</th>
+        <th>Percentage</th>
+        <th>Delete</th>
+        <th>Edit</th>
+    </tr>
+    </thead>
+    <tbody th:each="language : ${languages}">
+    <tr>
+        <td th:text="${language.id.countryCode}"></td>
+        <td th:text="${language.id.language}"></td>
+        <td th:text="${language.isOfficial}"></td>
+        <td th:text="${language.percentage} + '%'"></td>
+        <td><a th:href="@{/language/delete/{countryCode}/{language}(countryCode=${language.id.countryCode}, language=${language.id.language})}">Delete</a></td>
+        <td><a th:href="@{/language/edit/{countryCode}/{language}(countryCode=${language.id.countryCode}, language=${language.id.language})}">Edit</a></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
