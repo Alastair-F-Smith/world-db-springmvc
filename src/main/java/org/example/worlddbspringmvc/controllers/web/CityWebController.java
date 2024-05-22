@@ -106,12 +106,4 @@ public class CityWebController {
         }
         return cities;
     }
-
-///cities
-///city?name=London
-///city/{id}
-///city/add
-///city/edit/{id}
-///city/delete/{id}
-
 }
