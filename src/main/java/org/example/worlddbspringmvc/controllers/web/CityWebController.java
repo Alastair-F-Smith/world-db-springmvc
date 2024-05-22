@@ -4,7 +4,6 @@ import org.example.worlddbspringmvc.model.entities.CityEntity;
 import org.example.worlddbspringmvc.model.entities.CountryEntity;
 import org.example.worlddbspringmvc.model.exception.CityDoesNotExistException;
 import org.example.worlddbspringmvc.model.exception.CountryNotFoundException;
-import org.example.worlddbspringmvc.model.respositories.CityEntityRepository;
 import org.example.worlddbspringmvc.service.CityService;
 import org.example.worlddbspringmvc.service.CountryService;
 import org.springframework.stereotype.Controller;
