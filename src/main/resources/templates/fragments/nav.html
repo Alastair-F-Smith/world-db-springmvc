@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
@@ -15,9 +15,12 @@
             <li><a class="hover:text-green-600" href="cities">Cities</a></li>
             <li><a class="hover:text-green-600" href="languages">Languages</a></li>
         </ul>
-        <button class="bg-green-600 text-white font-bold py-2 px-4 rounded hover:bg-black ">
+        <a th:href="@{/logout}" sec:authorize="isAuthenticated()" class="bg-green-600 text-white font-bold py-2 px-4 rounded hover:bg-black ">
+            Log out
+        </a>
+        <a th:href="@{/login}" sec:authorize="not isAuthenticated()" class="bg-green-600 text-white font-bold py-2 px-4 rounded hover:bg-black ">
             Log in
-        </button>
+        </a>
     </div>
 </div>
 </body>
