@@ -21,8 +21,9 @@
                 </button>
             </div>
         </form>
+        
+        <a href="/language/add" sec:authorize="hasRole('ROLE_ADMIN')"><i class="fa-solid text-green-600  fa-square-plus fa-2x mt-5 mr-4 pointer-cursor hover:text-black"></i></a>
 
-        <a href="/city/add" sec:authorize="hasRole('ROLE_ADMIN')"><i class="fa-solid text-green-600  fa-square-plus fa-2x mt-5 mr-4 pointer-cursor hover:text-black"></i></a>
     </div>
     <div class="overflow-hidden rounded-lg border border-gray-200 shadow-md m-5 bg-black">
         <table class="w-full overflow-scroll border-collapse bg-white text-left text-sm text-gray-500">
