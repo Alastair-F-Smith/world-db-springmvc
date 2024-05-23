@@ -2,33 +2,40 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Edit city</title>
+    <title>Edit City</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
 </head>
-<body>
-<h1>Edit Book</h1>
-<form th:action="@{/city/edit/{id}(id=${city.id})}" th:object="${city}" method="post">
-    <label>Name
-    <input type="text" th:field="*{name}"/>
-    </label>
-    <label> Country
-    <select id="countryCode" name="countryCode" required>
-        <option th:value="${city.countryCode.code}"
-                th:text="${city.countryCode.name}">
-        </option>
-        <option disabled hidden style='display:none' value=''></option>
-        <option th:each="country : ${countries}"
-                th:value="${country.code}"
-                th:text="${country.name}">
-        </option>
-    </select>
-    </label>
-    <label>District
-        <input type="text" th:field="*{district}"/>
-    </label>
-    <label>Population
-        <input type="number" th:field="*{population}"/>
-    </label>
-    <button type="submit">Change</button>
-</form>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center">
+<nav style="position: fixed; top: 0; width: 100%; z-index: 1000;">
+    <div th:replace="fragments/nav"></div>
+</nav>
+<div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-lg">
+    <h1 class="text-2xl font-bold mb-6 text-center text-green-700">Edit City</h1>
+    <form th:action="@{/city/edit/{id}(id=${city.id})}" th:object="${city}" method="post" class="space-y-6">
+        <div>
+            <label for="name" class="block text-gray-700">Name</label>
+            <input type="text" id="name" th:field="*{name}" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-600 focus:border-green-600"/>
+        </div>
+        <div>
+            <label for="countryCode" class="block text-gray-700">Country</label>
+            <select id="countryCode" name="countryCode" th:field="*{countryCode}" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-600 focus:border-green-600" required>
+                <option th:value="${city.countryCode.code}" th:text="${city.countryCode.name}"></option>
+                <option disabled hidden style='display:none' value=''></option>
+                <option th:each="country : ${countries}" th:value="${country.code}" th:text="${country.name}"></option>
+            </select>
+        </div>
+        <div>
+            <label for="district" class="block text-gray-700">District</label>
+            <input type="text" id="district" th:field="*{district}" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-600 focus:border-green-600"/>
+        </div>
+        <div>
+            <label for="population" class="block text-gray-700">Population</label>
+            <input type="number" id="population" th:field="*{population}" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-600 focus:border-green-600"/>
+        </div>
+        <div class="text-center">
+            <button type="submit" class="bg-green-600 text-white font-bold py-2 px-4 rounded hover:bg-black">Change</button>
+        </div>
+    </form>
+</div>
 </body>
 </html>
