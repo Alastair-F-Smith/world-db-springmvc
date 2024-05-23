@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Country</title>
+</head>
+<body>
+<h1>Country</h1>
+<div th:if="${country==null}">Country Not Found</div>
+<div th:if="${country!=null}">
+    <table>
+        <thead>
+        <tr>
+            <th>Code</th>
+            <th>Name</th>
+            <th>Continent</th>
+            <th>Region</th>
+            <th>Population</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+            <td th:text="${country.code}"></td>
+            <td th:text="${country.name}"></td>
+            <td th:text="${country.continent}"></td>
+            <td th:text="${country.region}"></td>
+            <td th:text="${country.population}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+</body>
+</html>
