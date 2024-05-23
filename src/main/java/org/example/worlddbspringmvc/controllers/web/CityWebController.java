@@ -6,6 +6,7 @@ import org.example.worlddbspringmvc.model.exception.CityDoesNotExistException;
 import org.example.worlddbspringmvc.model.exception.CountryNotFoundException;
 import org.example.worlddbspringmvc.service.CityService;
 import org.example.worlddbspringmvc.service.CountryService;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -41,12 +42,14 @@ public class CityWebController {
         return "cities";
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/city/delete/{id}")
     public String deleteCityById(@PathVariable int id) {
         cityService.deleteCity(id);
         return "redirect:/cities";
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/city/add")
     public String addCity(Model model) {
         CityEntity city = new CityEntity();
@@ -55,6 +58,7 @@ public class CityWebController {
         return "addCity";
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/city/save")
     public String saveCity(@RequestParam String name,
                            @RequestParam String countryCode,
@@ -70,6 +74,7 @@ public class CityWebController {
         return "redirect:/cities";
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/city/edit/{id}")
     public String editCity(@PathVariable int id, Model model) throws CityDoesNotExistException {
         CityEntity city = cityService.getCityById(id).orElseThrow(()->new CityDoesNotExistException(""));
@@ -78,6 +83,7 @@ public class CityWebController {
         return "editCity";
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/city/edit/{id}")
     public String updateCity(@RequestParam("name") String name,
                              @RequestParam("countryCode") String countryCode,
