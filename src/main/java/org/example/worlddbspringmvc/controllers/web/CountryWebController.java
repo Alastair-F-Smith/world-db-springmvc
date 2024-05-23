@@ -13,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -47,8 +48,12 @@ public class CountryWebController {
 
 
     @GetMapping("/countries")
-    public String getCountries(Model model){
-        model.addAttribute("countries", countryService.getAllCountries());
+    public String getCountries(String countryName, Model model){
+        if(countryName == null){
+            model.addAttribute("countries", countryService.getAllCountries());
+        }else{
+            model.addAttribute("countries", findByCountryNameContains(countryName));
+        }
         return "countries/countries";
     }
 
@@ -117,5 +122,18 @@ public class CountryWebController {
             countryService.deleteCountry(countryToDelete.getCode());
         }
         return "redirect:/countries";
+    }
+
+    private List<CountryEntity> findByCountryNameContains(String name){
+        List<CountryEntity> countries = new ArrayList<>();
+        for(CountryEntity country: countryService.getAllCountries()){
+            if(country.getName().toLowerCase().contains(name.toLowerCase())){
+                countries.add(country);
+            }
+            if(country.getCode().equalsIgnoreCase(name)){
+                countries.add(country);
+            }
+        }
+        return countries;
     }
 };
