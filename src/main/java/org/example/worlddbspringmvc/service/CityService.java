@@ -1,6 +1,7 @@
 package org.example.worlddbspringmvc.service;
 
 import org.example.worlddbspringmvc.model.entities.CityEntity;
+import org.example.worlddbspringmvc.model.entities.CountryEntity;
 import org.example.worlddbspringmvc.model.exception.CityAlreadyExistsException;
 import org.example.worlddbspringmvc.model.respositories.CityEntityRepository;
 import org.springframework.stereotype.Service;
@@ -55,6 +56,12 @@ public class CityService {
             return false;
         }
     }
+    public void deleteCitiesByCountryCode(CountryEntity countryEntity) {
+        List<CityEntity>  cityEntities = cityEntityRepository.getCityByCountryCode(countryEntity);
+        for (CityEntity cityEntity : cityEntities) {
+            deleteCity(cityEntity.getId());
+        }
+    }
 
     public List<CityEntity> findCitiesByName(String name){
         return cityEntityRepository.findByName(name);
@@ -64,5 +71,10 @@ public class CityService {
         if (getCityById(city.getId()).isPresent()) {
             throw new CityAlreadyExistsException(city.getId());
         }
+    }
+
+    public List<CityEntity> getCitiesByCountry(CountryEntity country) {
+        List<CityEntity>  cityEntities = cityEntityRepository.getCityByCountryCode(country);
+        return cityEntities;
     }
 }

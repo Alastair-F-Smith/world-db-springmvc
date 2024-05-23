@@ -1,10 +1,13 @@
 package org.example.worlddbspringmvc.service;
 
+import org.example.worlddbspringmvc.model.entities.CountryEntity;
 import org.example.worlddbspringmvc.model.entities.CountryLanguageEntity;
 import org.example.worlddbspringmvc.model.entities.CountryLanguageEntityId;
 import org.example.worlddbspringmvc.model.respositories.CountryLanguageEntityRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -52,5 +55,23 @@ public class CountryLanguageService {
         } else {
             return false;
         }
+
     }
+
+    public List<CountryLanguageEntity> getCountryLanguagesByCountry(String countryCode) {
+        return getAllLanguageCountrySpeaks(countryCode);
+    }
+
+
+    private List<CountryLanguageEntity> getAllLanguageCountrySpeaks(String countryCode){
+        List<CountryLanguageEntity> countries = new ArrayList<>();
+        for(CountryLanguageEntity countrylanguageEntity : countrylanguageEntityRepository.findAll()){
+            if(countrylanguageEntity.getCountryCode().getCode().equals(countryCode)){
+                countries.add(countrylanguageEntity);
+            }
+        }
+        return countries;
+    }
+
+
 }
