@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
@@ -17,6 +18,7 @@ import java.math.BigDecimal;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.redirectedUrl;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -33,6 +35,7 @@ public class CountryControllerMockTests {
     private CountryEntityRepository countryEntityRepository;
 
     @Test
+    @WithMockUser(username = "admin")
     @Order(1)
     void testCountriesPage() throws Exception {
         int statusCode = mockMvc.perform(get("/countries"))
@@ -44,6 +47,7 @@ public class CountryControllerMockTests {
     }
 
     @Test
+    @WithMockUser(username = "admin")
     @Order(2)
     void testCountryByNamePage() throws Exception {
         int statusCode = mockMvc.perform(get("/country?name=sweden"))
@@ -55,6 +59,7 @@ public class CountryControllerMockTests {
     }
 
     @Test
+    @WithMockUser(username = "admin")
     @Order(3)
     void testCountryByCodePage() throws Exception {
         int statusCode = mockMvc.perform(get("/country/AFG"))
@@ -66,6 +71,7 @@ public class CountryControllerMockTests {
     }
 
     @Test
+    @WithMockUser(username = "admin", authorities={"ROLE_ADMIN"})
     @Order(4)
     void testEditCountryPage() throws Exception {
         int statusCode = mockMvc.perform(get("/country/edit/AFG"))
@@ -77,6 +83,7 @@ public class CountryControllerMockTests {
     }
 
     @Test
+    @WithMockUser(username = "admin", authorities={"ROLE_ADMIN"})
     @Order(5)
     void testAddCountryPage() throws Exception {
         int statusCode = mockMvc.perform(get("/country/add"))
@@ -88,6 +95,7 @@ public class CountryControllerMockTests {
     }
 
     @Test
+    @WithMockUser(username = "admin", authorities={"ROLE_ADMIN"})
     @Order(6)
     void testAddCountry() throws Exception {
         CountryEntity countryEntity = new CountryEntity();
@@ -134,6 +142,7 @@ public class CountryControllerMockTests {
     }
 
     @Test
+    @WithMockUser(username = "admin", authorities={"ROLE_ADMIN"})
     @Order(7)
     void testEditCountry() throws Exception {
         mockMvc.perform(post("/country/edit/TEL")
@@ -150,6 +159,7 @@ public class CountryControllerMockTests {
     }
 
     @Test
+    @WithMockUser(username = "admin", authorities={"ROLE_ADMIN"})
     @Order(8)
     void testDeleteCountry() throws Exception {
         mockMvc.perform(get("/country/delete/TEL"))
