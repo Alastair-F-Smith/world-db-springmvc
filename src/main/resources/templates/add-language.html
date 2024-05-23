@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Language</title>
+</head>
+<body>
+<div class="pt-20 mx-4">
+    <h1>Add Language</h1>
+    <form th:action="@{/language/add}" method="post">
+        <div class="mb-3">
+            <label for="countryCode">Country Code</label>
+            <input type="text" id="countryCode" name="countryCode" required/><br>
+        </div>
+        <div class="mb-3">
+            <label for="language">Language</label>
+            <input type="text" id="language" name="language" required/><br>
+        </div>
+        <div class="mb-3">
+            <label for="isOfficial">Is Official</label>
+            <select name="is-official" id="isOfficial" required>
+                <option value="T">T</option>
+                <option value="F">F</option>
+            </select><br>
+        </div>
+        <div class="mb-3">
+            <label for="percentage">Percentage</label>
+            <input type="number" id="percentage" name="percentage" step="0.1" min="0" max="100" required/><br>
+        </div>
+        <button type="submit">Add Language</button>
+    </form>
+</div>
+</body>
+</html>

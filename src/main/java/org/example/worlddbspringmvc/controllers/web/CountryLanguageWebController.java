@@ -1,5 +1,6 @@
 package org.example.worlddbspringmvc.controllers.web;
 
+import org.example.worlddbspringmvc.model.entities.CityEntity;
 import org.example.worlddbspringmvc.model.entities.CountryLanguageEntity;
 import org.example.worlddbspringmvc.model.entities.CountryLanguageEntityId;
 import org.example.worlddbspringmvc.service.CountryLanguageService;
@@ -10,6 +11,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
 
 @Controller
@@ -26,9 +29,26 @@ public class CountryLanguageWebController {
     }
 
     @GetMapping("/languages")
-    public String getLanguages(Model model) {
-        model.addAttribute("languages", countryLanguageService.getAllCountryLanguages());
+    public String getLanguages(String languageName, Model model) {
+        if (languageName == null) {
+            model.addAttribute("languages", countryLanguageService.getAllCountryLanguages());
+        } else {
+            model.addAttribute("languages", findByLanguageNameContains(languageName));
+        }
         return "languages";
+    }
+
+    private List<CountryLanguageEntity> findByLanguageNameContains(String name){
+        List<CountryLanguageEntity> languages = new ArrayList<>();
+        for(var language: countryLanguageService.getAllCountryLanguages()){
+            if(language.getId().getLanguage().toLowerCase().contains(name.toLowerCase())){
+                languages.add(language);
+            }
+            if(language.getCountryCode().getCode().equalsIgnoreCase(name)){
+                languages.add(language);
+            }
+        }
+        return languages;
     }
 
     @GetMapping("/language/edit/{countryCode}/{language}")
@@ -66,11 +86,28 @@ public class CountryLanguageWebController {
     }
 
     @PostMapping("/language/add")
-    public String addLanguage(@ModelAttribute CountryLanguageEntity languageEntity){
+    public String addLanguage(@RequestParam String countryCode,
+                              @RequestParam String language,
+                              @RequestParam(name = "is-official") String isOfficial,
+                              @RequestParam BigDecimal percentage){
+        CountryLanguageEntityId id = new CountryLanguageEntityId();
+        id.setCountryCode(countryCode);
+        id.setLanguage(language);
+        logger.info("Updating language: " + language + " with country code = " + countryCode);
+        CountryLanguageEntity languageEntity = new CountryLanguageEntity();
+        languageEntity.setId(id);
+        languageEntity.setIsOfficial(isOfficial);
+        languageEntity.setPercentage(percentage);
+        languageEntity.setCountryCode(countryService.getCountryByCode(countryCode).orElseThrow());
         countryLanguageService.createCountryLanguage(languageEntity);
         return "redirect:/languages";
+
     }
 
-//    @GetMapping
+    @GetMapping("/language/add")
+    public String getAddLangaugeForm(Model model){
+        model.addAttribute("language", new CountryLanguageEntity());
+        return "add-language";
+    }
 
 }
