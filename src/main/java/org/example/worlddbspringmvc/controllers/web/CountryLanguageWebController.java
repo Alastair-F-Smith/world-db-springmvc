@@ -1,6 +1,5 @@
 package org.example.worlddbspringmvc.controllers.web;
 
-import org.example.worlddbspringmvc.model.entities.CityEntity;
 import org.example.worlddbspringmvc.model.entities.CountryLanguageEntity;
 import org.example.worlddbspringmvc.model.entities.CountryLanguageEntityId;
 import org.example.worlddbspringmvc.service.CountryLanguageService;
