@@ -36,15 +36,21 @@ public class CityWebController {
     }
 
     @GetMapping("/city/{id}")
-    public String getCityById(@PathVariable int id, Model model) {
-        model.addAttribute("cityByID", cityService.getCityById(id));
-        return "cities";
+    public String getCityById(@PathVariable int id, Model model) throws CityDoesNotExistException {
+        if(cityService.getCityById(id).isPresent()){
+            model.addAttribute("city", cityService.getCityById(id));
+            return "cities";
+        }
+        throw new CityDoesNotExistException("City with id: " + id + " does not exists");
     }
 
     @GetMapping("/city/delete/{id}")
-    public String deleteCityById(@PathVariable int id) {
-        cityService.deleteCity(id);
-        return "redirect:/cities";
+    public String deleteCityById(@PathVariable int id) throws CityDoesNotExistException {
+        if(cityService.deleteCity(id)){
+            return "redirect:/cities";
+        }else{
+            throw new CityDoesNotExistException("City with id: " + id + " does not exists");
+        }
     }
 
     @GetMapping("/city/add")
