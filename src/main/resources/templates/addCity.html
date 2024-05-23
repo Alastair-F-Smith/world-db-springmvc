@@ -12,8 +12,8 @@
     </label>
     <label> Country
         <select id="countryCode" name="countryCode" required>
-            <option th:value="${city.countryCode.code}"
-                    th:text="${city.countryCode.name}">
+            <option th:value="${city.countryCode}"
+                    th:text="${city.name}">
             </option>
             <option disabled hidden style='display:none' value=''></option>
             <option th:each="country : ${countries}"
