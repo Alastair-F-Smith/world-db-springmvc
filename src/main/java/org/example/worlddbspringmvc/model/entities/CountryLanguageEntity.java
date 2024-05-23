@@ -29,6 +29,15 @@ public class CountryLanguageEntity {
     @Column(name = "Percentage", nullable = false, precision = 4, scale = 1)
     private BigDecimal percentage;
 
+    public CountryLanguageEntity() {
+    }
+
+    public CountryLanguageEntity(CountryLanguageEntityId id, String isOfficial, BigDecimal percentage) {
+        this.id = id;
+        this.isOfficial = isOfficial;
+        this.percentage = percentage;
+    }
+
     public CountryLanguageEntityId getId() {
         return id;
     }

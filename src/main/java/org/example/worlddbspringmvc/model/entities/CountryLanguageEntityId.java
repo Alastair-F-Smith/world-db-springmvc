@@ -25,6 +25,14 @@ public class CountryLanguageEntityId implements Serializable {
     @Column(name = "Language", nullable = false, length = 30)
     private String language;
 
+    public CountryLanguageEntityId() {
+    }
+
+    public CountryLanguageEntityId(String countryCode, String language) {
+        this.countryCode = countryCode;
+        this.language = language;
+    }
+
     public String getCountryCode() {
         return countryCode;
     }
