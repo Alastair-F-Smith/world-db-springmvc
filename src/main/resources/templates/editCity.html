@@ -5,6 +5,30 @@
     <title>Edit city</title>
 </head>
 <body>
-
+<h1>Edit Book</h1>
+<form th:action="@{/city/edit/{id}(id=${city.id})}" th:object="${city}" method="post">
+    <label>Name
+    <input type="text" th:field="*{name}"/>
+    </label>
+    <label> Country
+    <select id="countryCode" name="countryCode" required>
+        <option th:value="${city.countryCode.code}"
+                th:text="${city.countryCode.name}">
+        </option>
+        <option disabled hidden style='display:none' value=''></option>
+        <option th:each="country : ${countries}"
+                th:value="${country.code}"
+                th:text="${country.name}">
+        </option>
+    </select>
+    </label>
+    <label>District
+        <input type="text" th:field="*{district}"/>
+    </label>
+    <label>Population
+        <input type="number" th:field="*{population}"/>
+    </label>
+    <button type="submit">Change</button>
+</form>
 </body>
 </html>

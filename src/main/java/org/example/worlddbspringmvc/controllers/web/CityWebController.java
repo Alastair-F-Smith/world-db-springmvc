@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 @Controller
@@ -50,6 +51,7 @@ public class CityWebController {
     public String addCity(Model model) {
         CityEntity city = new CityEntity();
         model.addAttribute("city", city);
+        model.addAttribute("countries", sortCountries(countryService.getAllCountries()));
         return "addCity";
     }
 
@@ -72,7 +74,7 @@ public class CityWebController {
     public String editCity(@PathVariable int id, Model model) throws CityDoesNotExistException {
         CityEntity city = cityService.getCityById(id).orElseThrow(()->new CityDoesNotExistException(""));
         model.addAttribute("city", city);
-        model.addAttribute("countries", countryService.getAllCountries());
+        model.addAttribute("countries", sortCountries(countryService.getAllCountries()));
         return "editCity";
     }
 
@@ -104,5 +106,11 @@ public class CityWebController {
             }
         }
         return cities;
+    }
+
+    private List<CountryEntity> sortCountries(List<CountryEntity> countries){
+        List<CountryEntity> sortedCountries = countryService.getAllCountries();
+        sortedCountries.sort(Comparator.comparing(CountryEntity::getName));
+        return sortedCountries;
     }
 }
