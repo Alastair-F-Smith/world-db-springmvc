@@ -1,0 +1,7 @@
+tbody td {
+
+
+
+    transform: translateY(10px);
+    transition: ease, transform 0.8s ease;
+}

@@ -30,6 +30,11 @@ public class CountryService {
         return countryRepository.findById(code);
     }
 
+    public Optional<CountryEntity> getCountryByName(String name) {
+        return Optional.ofNullable(countryRepository.findByName(name));
+    }
+
+
     public CountryEntity updateCountry(String code, CountryEntity updatedCountry) {
         Optional<CountryEntity> countryOptional = countryRepository.findById(code);
         if (countryOptional.isPresent()) {

@@ -6,4 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 //@Hidden
 public interface CountryEntityRepository extends JpaRepository<CountryEntity, String> {
+
+    public CountryEntity findByName(String name);
+
 }
