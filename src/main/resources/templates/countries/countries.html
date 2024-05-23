@@ -5,6 +5,7 @@
     <title>Countries</title>
     <link th:href="@{/style.css}" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@^2.0/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="icon" type="image/x-icon" href="/favicon.png">
 </head>
 
 <body>
@@ -13,8 +14,15 @@
 </nav>
 <div class="pt-20 border-none">
     <div class="flex justify-between gap-1 border border-solid mx-4">
-        <div th:replace="fragments/search-bar"></div>
-        <i class="fa-solid text-green-600  fa-square-plus fa-2x mt-5 mr-4 pointer-cursor hover:text-black"></i>
+        <form method="get" th:action="@{/countries}">
+            <div class="border rounded overflow-hidden flex  ml-4 my-4">
+                <input  name="countryName" th:size="40" th:value="${countryName}" type="text" class="px-4 py-2" placeholder="Search by country name or country code">
+                <button class="flex items-center justify-center px-4 border-l">
+                    <svg class="h-4 w-4 text-grey-dark" fill="currentColor" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M16.32 14.9l5.39 5.4a1 1 0 0 1-1.42 1.4l-5.38-5.38a8 8 0 1 1 1.41-1.41zM10 16a6 6 0 1 0 0-12 6 6 0 0 0 0 12z"/></svg>
+                </button>
+            </div>
+        </form>
+        <a href="/country/add"><i class="fa-solid text-green-600  fa-square-plus fa-2x mt-5 mr-4 pointer-cursor hover:text-black"></i></a>
     </div>
 <div class="overflow-hidden rounded-lg border border-gray-200 shadow-md m-5 bg-black">
     <table class="w-full overflow-scroll border-collapse bg-white text-left text-sm text-gray-500">
@@ -79,6 +87,8 @@
     </table>
 </div>
 </div>
+
+
 <script>
     document.addEventListener("DOMContentLoaded", function () {
         const columns = Array.from({ length: 6 }, (_, i) =>

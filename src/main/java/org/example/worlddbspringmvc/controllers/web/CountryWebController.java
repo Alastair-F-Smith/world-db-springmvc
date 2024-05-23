@@ -1,23 +1,38 @@
 package org.example.worlddbspringmvc.controllers.web;
 
+import org.example.worlddbspringmvc.model.entities.CityEntity;
 import org.example.worlddbspringmvc.model.entities.CountryEntity;
+import org.example.worlddbspringmvc.model.entities.CountryLanguageEntity;
 import org.example.worlddbspringmvc.model.respositories.CountryEntityRepository;
+import org.example.worlddbspringmvc.model.respositories.CountryLanguageEntityRepository;
+import org.example.worlddbspringmvc.service.CityService;
+import org.example.worlddbspringmvc.service.CountryLanguageService;
 import org.example.worlddbspringmvc.service.CountryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
 @Controller
 public class CountryWebController {
 
-
     private final CountryEntityRepository countryEntityRepository;
     private final CountryService countryService;
+    private final CityService cityService;
+    private final CountryLanguageService countryLanguageService;
+    private final CountryLanguageEntityRepository countryLanguageEntityRepository;
+
     @Autowired
-    public CountryWebController(CountryEntityRepository countryEntityRepository, CountryService countryService) {
+    public CountryWebController(CountryEntityRepository countryEntityRepository, CountryService countryService, CityService cityService, CountryLanguageService countryLanguageService, CountryLanguageEntityRepository countryLanguageEntityRepository) {
         this.countryEntityRepository = countryEntityRepository;
         this.countryService = countryService;
+        this.cityService = cityService;
+        this.countryLanguageService = countryLanguageService;
+        this.countryLanguageEntityRepository = countryLanguageEntityRepository;
     }
 
 
@@ -33,13 +48,17 @@ public class CountryWebController {
 
 
     @GetMapping("/countries")
-    public String getCountries(Model model){
-        model.addAttribute("countries", countryService.getAllCountries());
+    public String getCountries(String countryName, Model model){
+        if(countryName == null){
+            model.addAttribute("countries", countryService.getAllCountries());
+        }else{
+            model.addAttribute("countries", findByCountryNameContains(countryName));
+        }
         return "countries/countries";
     }
 
 
-    @GetMapping("/country")
+;    @GetMapping("/country")
     public String getCountryByName(@RequestParam String name, Model model){
         model.addAttribute("country", countryEntityRepository.findByName(name));
         return "countries/country";
@@ -86,8 +105,35 @@ public class CountryWebController {
     }
 
     @GetMapping("/country/delete/{countryCode}")
-    public String deleteCountry(@PathVariable String countryCode){
-        countryService.deleteCountry(countryCode);
+    public String deleteCountry(@PathVariable String countryCode) {
+        Optional<CountryEntity> countryOptional = countryService.getCountryByCode(countryCode);
+        if (countryOptional.isPresent()) {
+            CountryEntity countryToDelete = countryOptional.get();
+
+            List<CityEntity> cities = cityService.getCitiesByCountry(countryToDelete);
+            for (CityEntity city : cities) {
+                cityService.deleteCity(city.getId());
+            }
+
+            List<CountryLanguageEntity> countryLanguages = countryLanguageService.getCountryLanguagesByCountry(countryCode);
+            for(CountryLanguageEntity countryLanguage : countryLanguages){
+                countryLanguageService.deleteCountryLanguage(countryLanguage.getId());
+            }
+            countryService.deleteCountry(countryToDelete.getCode());
+        }
         return "redirect:/countries";
     }
-}
+
+    private List<CountryEntity> findByCountryNameContains(String name){
+        List<CountryEntity> countries = new ArrayList<>();
+        for(CountryEntity country: countryService.getAllCountries()){
+            if(country.getName().toLowerCase().contains(name.toLowerCase())){
+                countries.add(country);
+            }
+            if(country.getCode().equalsIgnoreCase(name)){
+                countries.add(country);
+            }
+        }
+        return countries;
+    }
+};

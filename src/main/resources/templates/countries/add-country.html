@@ -1,29 +1,72 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Add Author</title>
+  <meta charset="UTF-8">
+  <title>Add Author</title>
 </head>
 <body>
 <h1>Add Author</h1>
 <form th:action="@{/country/add}" th:object="${country}" method="post">
-    <label>Code
-        <input type="text" th:field="*{code}"/>
-    </label><br>
-    <label>Name
-        <input type="text" th:field="*{name}"/>
-    </label><br>
-    <label>Continent
-        <select th:field="*{continent}">
-            <option th:value="'Africa'" th:text="Africa"></option>
-            <option th:value="'Asia'" th:text="Asia"></option>
-            <option th:value="'Europe'" th:text="Europe"></option>
-            <option th:value="'North America'" th:text="North America"></option>
-            <option th:value="'South America'" th:text="South America"></option>
-            <option th:value="'Oceania'" th:text="Oceania"></option>
-        </select>
-    </label><br>
-    <button type="submit">Submit</button>
+  <label>Code
+    <input type="text" th:field="*{code}"/>
+  </label><br>
+  <label>Name
+    <input type="text" th:field="*{name}"/>
+  </label><br>
+  <label>Continent
+    <select th:field="*{continent}">
+      <option th:value="'Africa'" th:text="'Africa'"></option>
+      <option th:value="'Asia'" th:text="'Asia'"></option>
+      <option th:value="'Europe'" th:text="'Europe'"></option>
+      <option th:value="'North America'" th:text="'North America'"></option>
+      <option th:value="'South America'" th:text="'South America'"></option>
+      <option th:value="'Oceania'" th:text="'Oceania'"></option>
+    </select>
+  </label><br>
+  <label>Surface Area
+    <input type="text" th:field="*{surfaceArea}"/>
+  </label><br>
+
+  <label>Independence Year
+    <input type="text" th:field="*{indepYear}"/>
+  </label><br>
+
+  <label>Population
+    <input type="text" th:field="*{population}"/>
+  </label><br>
+
+  <label>Life Expectancy
+    <input type="text" th:field="*{lifeExpectancy}"/>
+  </label><br>
+
+  <label>GNP
+    <input type="text" th:field="*{gnp}"/>
+  </label><br>
+
+  <label>Old GNP
+    <input type="text" th:field="*{GNPOld}"/>
+  </label><br>
+
+  <label>Local Name
+    <input type="text" th:field="*{localName}"/>
+  </label><br>
+
+  <label>Government Form
+    <input type="text" th:field="*{governmentForm}"/>
+  </label><br>
+
+  <label>Head of State
+    <input type="text" th:field="*{headOfState}"/>
+  </label><br>
+
+  <label>Capital
+    <input type="text" th:field="*{capital}"/>
+  </label><br>
+
+  <label>Code 2
+    <input type="text" th:field="*{code2}"/>
+  </label><br>
+  <button type="submit">Submit</button>
 </form>
 
 </body>
