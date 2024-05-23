@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Countries</title>
@@ -22,7 +22,7 @@
                 </button>
             </div>
         </form>
-        <a href="/country/add"><i class="fa-solid text-green-600  fa-square-plus fa-2x mt-5 mr-4 pointer-cursor hover:text-black"></i></a>
+        <a href="/country/add" sec:authorize="hasRole('ROLE_ADMIN')"><i class="fa-solid text-green-600  fa-square-plus fa-2x mt-5 mr-4 pointer-cursor hover:text-black"></i></a>
     </div>
 <div class="overflow-hidden rounded-lg border border-gray-200 shadow-md m-5 bg-black">
     <table class="w-full overflow-scroll border-collapse bg-white text-left text-sm text-gray-500">
@@ -43,7 +43,7 @@
             <td th:text="${country.continent}"></td>
             <td th:text="${country.region}"></td>
             <td th:text="${country.population}"></td>
-            <td class="px-6 py-4">
+            <td class="px-6 py-4" sec:authorize="hasRole('ROLE_ADMIN')">
                 <div class="flex justify-end gap-4">
                     <a class="hover:text-red-600" th:href="@{'/country/delete/' + ${country.code}}">
                         <svg

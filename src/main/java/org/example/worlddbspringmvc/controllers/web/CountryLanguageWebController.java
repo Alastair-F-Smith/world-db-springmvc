@@ -5,6 +5,7 @@ import org.example.worlddbspringmvc.model.entities.CountryLanguageEntityId;
 import org.example.worlddbspringmvc.service.CountryLanguageService;
 import org.example.worlddbspringmvc.service.CountryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -50,6 +51,7 @@ public class CountryLanguageWebController {
         return languages;
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/language/edit/{countryCode}/{language}")
     public String getEditLanguageForm(@PathVariable String countryCode, @PathVariable String language, Model model) {
         CountryLanguageEntityId id = new CountryLanguageEntityId();
@@ -60,6 +62,7 @@ public class CountryLanguageWebController {
         return "edit-language";
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/language/edit/{countryCode}/{language}")
     public String editLanguage(@PathVariable String countryCode, @PathVariable String language,
                                @RequestParam(name = "is-official") String isOfficial,
@@ -74,7 +77,7 @@ public class CountryLanguageWebController {
         return "redirect:/languages";
     }
 
-
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/language/delete/{countryCode}/{language}")
     public String deleteLanguage(@PathVariable String countryCode, @PathVariable String language){
         CountryLanguageEntityId id = new CountryLanguageEntityId();
@@ -84,6 +87,7 @@ public class CountryLanguageWebController {
         return "redirect:/languages";
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/language/add")
     public String addLanguage(@RequestParam String countryCode,
                               @RequestParam String language,
@@ -103,6 +107,7 @@ public class CountryLanguageWebController {
 
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/language/add")
     public String getAddLangaugeForm(Model model){
         model.addAttribute("language", new CountryLanguageEntity());

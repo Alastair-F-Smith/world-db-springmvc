@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <meta charset="UTF-8">
     <title>Languages</title>
@@ -21,8 +21,9 @@
                 </button>
             </div>
         </form>
+        
+        <a href="/language/add" sec:authorize="hasRole('ROLE_ADMIN')"><i class="fa-solid text-green-600  fa-square-plus fa-2x mt-5 mr-4 pointer-cursor hover:text-black"></i></a>
 
-        <a href="/language/add"><i class="fa-solid text-green-600  fa-square-plus fa-2x mt-5 mr-4 pointer-cursor hover:text-black"></i></a>
     </div>
     <div class="overflow-hidden rounded-lg border border-gray-200 shadow-md m-5 bg-black">
         <table class="w-full overflow-scroll border-collapse bg-white text-left text-sm text-gray-500">
@@ -32,7 +33,7 @@
                 <th class="pr-2 py-4 font-medium text-gray-900">Language</th>
                 <th class="pr-2 py-4 font-medium text-gray-900">Is Official?</th>
                 <th class="pr-2 py-4 font-medium text-gray-900">Percentage</th>
-                <th  class="pr-2 py-4" ></th>
+                <th  class="pr-2 py-4" sec:authorize="hasRole('ROLE_ADMIN')"></th>
             </tr>
             </thead>
             <tbody class="divide-y divide-gray-100 border-t border-gray-100">
@@ -41,7 +42,7 @@
                 <td th:text="${language.id.language}"></td>
                 <td class="" th:text="${language.isOfficial}"></td>
                 <td th:text="${language.percentage} + '%'"></td>
-                <td class="px-6 py-4">
+                <td class="px-6 py-4" sec:authorize="hasRole('ROLE_ADMIN')">
                     <div class="flex justify-end gap-4">
                         <a class="hover:text-red-600" th:href="@{/language/delete/{countryCode}/{language}(countryCode=${language.id.countryCode}, language=${language.id.language})}">
                             <svg

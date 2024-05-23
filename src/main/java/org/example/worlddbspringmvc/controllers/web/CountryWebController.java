@@ -9,6 +9,7 @@ import org.example.worlddbspringmvc.service.CityService;
 import org.example.worlddbspringmvc.service.CountryLanguageService;
 import org.example.worlddbspringmvc.service.CountryService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.ui.Model;
@@ -71,6 +72,7 @@ public class CountryWebController {
         return "countries/country";
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/country/edit/{id}")
     public String getEditCountryForm(@PathVariable String id, Model model){
         CountryEntity countryEntity = countryEntityRepository.findById(id).orElse(null);
@@ -78,6 +80,7 @@ public class CountryWebController {
         return "countries/edit-country";
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/country/add")
     public String getAddCountry(Model model) {
         CountryEntity countryEntity = new CountryEntity();
@@ -85,13 +88,14 @@ public class CountryWebController {
         return "countries/add-country";
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/country/add")
     public String addCountry(@ModelAttribute("country") CountryEntity countryEntity){
         countryEntityRepository.save(countryEntity);
         return "redirect:/countries";
     }
 
-
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PostMapping("/country/edit/{countryCode}")
     public String editCountry(@PathVariable String countryCode, @ModelAttribute("country") CountryEntity countryEntity, Model model){
         CountryEntity countryToEdit = countryService.getCountryByCode(countryCode).orElse(null);
@@ -104,6 +108,7 @@ public class CountryWebController {
 
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     @GetMapping("/country/delete/{countryCode}")
     public String deleteCountry(@PathVariable String countryCode) {
         Optional<CountryEntity> countryOptional = countryService.getCountryByCode(countryCode);
