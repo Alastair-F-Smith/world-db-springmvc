@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+<nav style="position: fixed; top: 0; width: 100%; z-index: 1000;">
+    <div th:replace="fragments/nav"></div>
+</nav>
+<div class="max-w-md bg-white p-10 rounded-lg shadow-lg">
+    <h1 class="text-2xl font-bold mb-6 text-green-600">Edit Language</h1>
+    <p th:if="${language == null}" class="text-green-600">Language not found</p>
+    <form th:if="${language != null}"
+          th:action="@{/language/edit/{countryCode}/{language}(countryCode=${language.id.countryCode}, language=${language.id.language})}"
+          th:object="${language}" method="post" class="space-y-4">
+        <label for="is-official" class="block text-gray-700">Is official?</label>
+        <select name="is-official" id="is-official" required
+                class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-600 focus:border-green-600">
+            <option value="T" th:selected="${language.isOfficial == 'T'}">T</option>
+            <option value="F" th:selected="${language.isOfficial == 'F'}">F</option>
+        </select>
+        <label for="percentage" class="block text-gray-700">Percentage</label>
+        <input name="percentage" id="percentage" type="number" step="0.1" min="0" max="100" th:field="*{percentage}"
+               class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-600 focus:border-green-600"/>
+        <button type="submit"
+                class="mt-4 px-6 py-2 bg-green-600 text-white font-semibold rounded-md hover:bg-green-600 focus:outline-none focus:ring-2 focus:ring-green-600">
+            Update
+        </button>
+    </form>
+</div>
+</body>
+</html>

@@ -1,10 +1,10 @@
 <h1>World-DB-Spring-MVC</h1>
-World-DB-Spring-MVC team consisting of Howard, Patryk S, Selam, Alastair, and Phoenix 👋.
+World-DB-Spring-MVC team consisting of Howard, Patryk S, Selam, Mamoon, Alastair, and Phoenix 👋.
 
 ## Project Overview
-This project creates a Java applicaiton that uses an SQL database which contains a list of countries and cities, along with other details.
-This applicaiton allows users to query certain fields within the database, while following the spring architecture layout: Entities->Repository->Service->Controller
-We implement RestAPIs and endpoints to allow the following CRUD methods.
+TThis project creates a Java application that uses an SQL database containing a list of countries and cities, along with other details. This application allows users to query certain fields within the database, following the Spring architecture layout: Entities -> Repository -> Service -> Controller. We have implemented REST APIs and endpoints to allow the following CRUD methods while providing each page with a stylized and user-friendly design.
+
+In addition, we have added a frontend user interface using Thymeleaf and implemented user login with Spring Security. This enhancement allows users to interact with the application through a web interface, providing a seamless and secure user experience. The login functionality ensures that only authenticated users can access certain features, maintaining the integrity and security of the application.
 
 - POST /city: Adds a new city.
 - GET /cities: Retrieves all cities.
@@ -16,69 +16,15 @@ We implement RestAPIs and endpoints to allow the following CRUD methods.
 
 ## Acceptance Criteria
 - Interact with the MySQL World Database
-- Use Spring JPA to connect and communicate with the Database
-- Use basic CRUD operations
-- Provide multiple types of search methods
-- Implement the service layer in your application
-- Tested with WebMVCTests
-- GUI to be provided via swaggar
-- Secure endpoints wiht an API
-- Error handling of API endpoints
+- Application allows user to view,add, update and delete from the 3 SQL tables
+- Use Tailwind to develop the frontend of the site
+- Use Spring security to secure the application.
+- Tested with WebMVCTests and MockMVCTests
 
 
 ## Dependencies
-JDK 21, JUnit, Mockito, SpringBoot, Spring Reactive Web, Rest Repositories, MariaDB Driver
-
-## File Structure
-```
-main
-│
-├── java
-│   └── org.example.worlddbspringmvc
-│       ├── controllers
-│       ├── model
-│       ├── service
-│       └── DungeonsAndDebugerssApplication
-│
-├── resources
-│   ├── application.properties
-│   └── banner.txt
-│
-test
-│
-├── java
-│   └── org.example.worlddbspringmvc
-│       ├── controller
-│       ├── service
-│       └── DungeonsAndDebugerssApplicationTest
-│
-target
-│
-.gitignore
-```
-
-
-## How to Fork the Project
-
-Setup: Ensure you have Java installed on your system. 
-
-    Fork this repository
-    Clone the forked repository and import it into yout preferred Java IDE
-    Add your contributions (code or documentation)
-    Commit and push
-    Wait for pull request to be merged
-
-Adding pom.xml
-You will need to create your own pom.xml file which needs to contain the following
-[Spring Web]
-[Spring Reactive Web]
-[Rest Repositories]
-[Spring Hateoas]
-[JDBC API]
-[Spring Data JPA]
-[Validation]
-[Spring Boot Actuator]
-[MySQL Driver or the driver for your database]
+- JDK 21
+  
 
 <h2>Connecting to your database</h2>
 
@@ -92,41 +38,34 @@ spring.jpa.hibernate.naming.physical-strategy=org.hibernate.boot.model.naming.Ph
 
 ```
 
+In addition to ensuring your database is correctly connected to, please make sure to run this script to ensure you have the user tables.
+
+```
+create table if not exists users
+(
+    id        bigint       not null
+        primary key,
+    password  varchar(255) null,
+    roles     varchar(255) null,
+    user_name varchar(255) null
+);
+
+create table if not exists users_seq
+(
+    next_val bigint null
+);
+
+insert into users_seq (next_val) values (1);
+```
+
 ## How to use the Program 
+Open the program and run the main method.
 
-Open the project directory: "Dungeons and Debuggerss" and open the class "App". Ensure the spring boot application is running:
-
+Open up browser and access your localhost
 ```
-  public static void main(String[] args) {
-        SpringApplication.run(DungeonsAndDebugerssApplication.class, args);
-    }
+http://localhost:8080/
 ```
-```
-          <dependency>
-    <groupId>org.springdoc</groupId>
-    <artifactId>springdoc-openapi-starter-webflux-ui</artifactId>
-    <version>2.1.0</version>
-        </dependency>
-```
-
-Run this:
-```
-http://localhost:8080/swagger-ui/index.html
-```
-In order for swagger to work with Spring WebFlux application ensure that springdoc-openapi-webflux depdency is inside the pom.xml file. For more information on how to install swagger onto your project please use the following guide:
-<br></br>
-https://www.baeldung.com/spring-rest-openapi-documentation
-<br></br>
-![image](https://github.com/HowardC04/World-DB-Spring-REST/assets/167005819/c05ca051-cc18-4ec0-9a58-092332eeaff1)
-
-Within the Swagger you can see that we have our crud methods grouped togther. Swaggar allows users to input endpoints to see how the server responds, it will include the status codes, response body and response headers
-When using Swagger UI it shows the curl that was submitted and the response section shows the JSON response from the
-endpoints on the tomcat server.
-
-
-In addition to this swagger allows you to input an API key to test any authorization filters within the server.
-
-To enhance maintainability we created logging functionality using java.util.logging. Our colour-coded logger allows you to easily track the flow of the program, record the state when an important event happens and capture errors or exceptions that occur during runtime. This can be used through the Log class and it's static methods.
+From here you can access all our endpoints from the user interface.
 
 
 ##  

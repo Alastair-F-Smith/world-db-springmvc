@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Add country</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-gray-100 min-h-screen flex items-center justify-center">
+
+<div class="bg-white p-8 rounded-lg shadow-lg w-full max-w-6xl">
+  <h1 class="text-2xl font-bold mb-6 text-center text-green-700">Add country</h1>
+  <form th:action="@{/country/add}" th:object="${country}" method="post" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div>
+      <label class="block text-gray-700">Code
+      <input type="text" th:field="*{code}" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-600 focus:border-green-600 "/>
+      </label>
+    </div>
+    <div>
+      <label class="block text-gray-700">Name
+      <input type="text" th:field="*{name}" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-600  focus:border-green-600 "/>
+      </label>
+    </div>
+    <div>
+      <label class="block text-gray-700">Continent
+      <select th:field="*{continent}" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-600  focus:border-green-600 ">
+        <option th:value="'Africa'" th:text="'Africa'"></option>
+        <option th:value="'Asia'" th:text="'Asia'"></option>
+        <option th:value="'Europe'" th:text="'Europe'"></option>
+        <option th:value="'North America'" th:text="'North America'"></option>
+        <option th:value="'South America'" th:text="'South America'"></option>
+        <option th:value="'Oceania'" th:text="'Oceania'"></option>
+      </select>
+      </label>
+    </div>
+    <div>
+      <label class="block text-gray-700">Region
+      <input type="text" th:field="*{region}" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-600 focus:border-green-600 "/>
+      </label>
+    </div>
+    <div>
+      <label class="block text-gray-700">Surface Area
+      <input type="text" th:field="*{surfaceArea}" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-600 focus:border-green-600 "/>
+      </label>
+    </div>
+    <div>
+      <label class="block text-gray-700">Independence Year
+      <input type="text" th:field="*{indepYear}" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-600 focus:border-green-600 "/>
+      </label>
+    </div>
+    <div>
+      <label class="block text-gray-700">Population
+      <input type="text" th:field="*{population}" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-600 focus:border-green-600 "/>
+      </label>
+    </div>
+    <div>
+      <label class="block text-gray-700">Life Expectancy
+      <input type="text" th:field="*{lifeExpectancy}" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-600 focus:border-green-600 "/>
+      </label>
+    </div>
+    <div>
+      <label class="block text-gray-700">GNP
+      <input type="text" th:field="*{gnp}" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-600 focus:border-green-600 "/>
+      </label>
+    </div>
+    <div>
+      <label class="block text-gray-700">Old GNP
+      <input type="text" th:field="*{GNPOld}" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-600 focus:border-green-600 "/>
+      </label>
+    </div>
+    <div>
+      <label class="block text-gray-700">Local Name
+      <input type="text" th:field="*{localName}" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-600 focus:border-green-600 "/>
+      </label>
+    </div>
+    <div>
+      <label class="block text-gray-700">Government Form
+      <input type="text" th:field="*{governmentForm}" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-600 focus:border-green-600 "/>
+      </label>
+    </div>
+    <div>
+      <label class="block text-gray-700">Head of State
+      <input type="text" th:field="*{headOfState}" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-600 focus:border-green-600 "/>
+      </label>
+    </div>
+    <div>
+      <label class="block text-gray-700">Capital
+      <input type="text" th:field="*{capital}" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-600 focus:border-green-600 "/>
+      </label>
+    </div>
+    <div>
+      <label class="block text-gray-700">Code 2
+      <input type="text" th:field="*{code2}" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-600 focus:border-green-600 "/>
+      </label>
+    </div>
+    <div class="md:col-span-2 text-center">
+      <button type="submit" class="bg-green-600 text-white font-bold py-2 px-4 rounded hover:bg-black">Submit</button>
+    </div>
+  </form>
+</div>
+</body>
+</html>

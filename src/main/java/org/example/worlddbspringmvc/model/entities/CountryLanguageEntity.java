@@ -3,6 +3,8 @@ package org.example.worlddbspringmvc.model.entities;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import org.hibernate.annotations.ColumnDefault;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.math.BigDecimal;
 
@@ -14,6 +16,7 @@ public class CountryLanguageEntity {
 
     @MapsId("countryCode")
     @ManyToOne(fetch = FetchType.EAGER, optional = false, cascade = CascadeType.MERGE)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @ColumnDefault("''")
     @JoinColumn(name = "CountryCode", nullable = false)
     private CountryEntity countryCode;
@@ -28,6 +31,15 @@ public class CountryLanguageEntity {
     @ColumnDefault("0.0")
     @Column(name = "Percentage", nullable = false, precision = 4, scale = 1)
     private BigDecimal percentage;
+
+    public CountryLanguageEntity() {
+    }
+
+    public CountryLanguageEntity(CountryLanguageEntityId id, String isOfficial, BigDecimal percentage) {
+        this.id = id;
+        this.isOfficial = isOfficial;
+        this.percentage = percentage;
+    }
 
     public CountryLanguageEntityId getId() {
         return id;
