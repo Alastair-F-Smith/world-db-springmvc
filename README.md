@@ -2,9 +2,9 @@
 World-DB-Spring-MVC team consisting of Howard, Patryk S, Selam, Mamoon, Alastair, and Phoenix 👋.
 
 ## Project Overview
-This project creates a Java applicaiton that uses an SQL database which contains a list of countries and cities, along with other details.
-This applicaiton allows users to query certain fields within the database, while following the spring architecture layout: Entities->Repository->Service->Controller
-We have implemented RestAPIs and endpoints to allow the following CRUD methods while providing each page with stylized and user friendly design.
+TThis project creates a Java application that uses an SQL database containing a list of countries and cities, along with other details. This application allows users to query certain fields within the database, following the Spring architecture layout: Entities -> Repository -> Service -> Controller. We have implemented REST APIs and endpoints to allow the following CRUD methods while providing each page with a stylized and user-friendly design.
+
+In addition, we have added a frontend user interface using Thymeleaf and implemented user login with Spring Security. This enhancement allows users to interact with the application through a web interface, providing a seamless and secure user experience. The login functionality ensures that only authenticated users can access certain features, maintaining the integrity and security of the application.
 
 - POST /city: Adds a new city.
 - GET /cities: Retrieves all cities.
@@ -24,19 +24,7 @@ We have implemented RestAPIs and endpoints to allow the following CRUD methods w
 
 ## Dependencies
 - JDK 21
-- JUnit
-- Mockito
-- SpringBoot
-- Spring Reactive Web
-- Rest Repositories
-- MariaDB Driver
-- Spring HATEOS
-- Thymeleaf
-- JDBC API
-- Spring Data JPA
-- MySQL Driver
-- Validation
-
+  
 
 <h2>Connecting to your database</h2>
 
@@ -50,7 +38,7 @@ spring.jpa.hibernate.naming.physical-strategy=org.hibernate.boot.model.naming.Ph
 
 ```
 
-In addition to ensuring your databse is correctly connected to, please make sure to run this script to ensure you have the user tables.
+In addition to ensuring your database is correctly connected to, please make sure to run this script to ensure you have the user tables.
 
 ```
 create table if not exists users
