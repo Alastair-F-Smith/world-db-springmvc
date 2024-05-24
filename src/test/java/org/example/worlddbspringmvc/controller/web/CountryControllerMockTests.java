@@ -116,7 +116,7 @@ public class CountryControllerMockTests {
         countryEntity.setCode2("TL");
 
         ResultActions resultActions;
-        resultActions = mockMvc.perform(post("/country/add")
+        resultActions = mockMvc.perform(post("/country/add").with(csrf())
                         .param("code", countryEntity.getCode())
                         .param("name", countryEntity.getName())
                         .param("continent", countryEntity.getContinent())
@@ -145,7 +145,7 @@ public class CountryControllerMockTests {
     @WithMockUser(username = "admin", authorities={"ROLE_ADMIN"})
     @Order(7)
     void testEditCountry() throws Exception {
-        mockMvc.perform(post("/country/edit/TEL")
+        mockMvc.perform(post("/country/edit/TEL").with(csrf())
                         .param("name", "TestingLand")
                         .param("population", String.valueOf(2000000)))
                 .andExpect(status().is3xxRedirection())

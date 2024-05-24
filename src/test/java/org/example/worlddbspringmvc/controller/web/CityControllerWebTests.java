@@ -14,6 +14,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultHandlers;
@@ -24,6 +25,7 @@ import java.util.Optional;
 import static org.hamcrest.Matchers.containsString;
 import static org.mockito.ArgumentMatchers.anyInt;
 import static org.mockito.Mockito.when;
+import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.*;
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.*;
@@ -45,6 +47,7 @@ public class CityControllerWebTests {
     CountryService countryService;
 
     @Test
+    @WithMockUser(username = "admin")
     @DisplayName("Tests cities page")
     void testsCitiesPage() throws Exception {
         mockMvc.perform(get("/cities"))
@@ -52,6 +55,7 @@ public class CityControllerWebTests {
     }
 
     @Test
+    @WithMockUser(username = "admin")
     @DisplayName("Test welcome page")
     void testWelcomePage() throws Exception {
         this.mockMvc.perform(get("/"))
@@ -60,6 +64,7 @@ public class CityControllerWebTests {
 
 
     @Test
+    @WithMockUser(username = "admin", authorities={"ROLE_ADMIN"})
     @DisplayName("Test editCity when city does not exist")
     void testEditCityWhenCityDoesNotExist() throws Exception {
 
@@ -69,6 +74,7 @@ public class CityControllerWebTests {
     }
 
     @Test
+    @WithMockUser(username = "admin", authorities={"ROLE_ADMIN"})
     @DisplayName("Test updateCity with valid data")
     void testUpdateCityWithValidData() throws Exception {
         CountryEntity country = new CountryEntity();
@@ -76,7 +82,7 @@ public class CityControllerWebTests {
 
         when(countryService.getCountryByCode("AFG")).thenReturn(Optional.of(country));
 
-        mockMvc.perform(MockMvcRequestBuilders.post("/city/edit/11")
+        mockMvc.perform(MockMvcRequestBuilders.post("/city/edit/11").with(csrf())
                         .param("name", "New jimmy")
                         .param("countryCode", "AFG")
                         .param("district", "Some District")
@@ -88,6 +94,7 @@ public class CityControllerWebTests {
 
 
     @Test
+    @WithMockUser(username = "admin", authorities={"ROLE_ADMIN"})
     @DisplayName("Given valid citi")
     void givenValidCitiesNames() throws Exception {
         mockMvc.perform(get("/city/add"))
@@ -99,6 +106,7 @@ public class CityControllerWebTests {
 
 
     @Test
+    @WithMockUser(username = "admin", authorities={"ROLE_ADMIN"})
     @DisplayName("Test saveCity method with valid data")
     void testSaveCityValidData() throws Exception {
         String countryCode = "AFG";
@@ -106,7 +114,7 @@ public class CityControllerWebTests {
         countryEntity.setCode(countryCode);
         when(countryService.getCountryByCode(countryCode)).thenReturn(Optional.of(countryEntity));
         System.out.println(countryEntity);
-        mockMvc.perform(post("/city/save")
+        mockMvc.perform(post("/city/save").with(csrf())
                         .param("name", "Herattest")
                         .param("countryCode", "AFG")
                         .param("district", "Herat")
@@ -119,6 +127,7 @@ public class CityControllerWebTests {
 
 
     @Test
+    @WithMockUser(username = "admin", authorities={"ROLE_ADMIN"})
     @DisplayName("Given invalid cities id, return bad request")
     void givenInvalidCitiesIdReturnBadRequest() throws Exception {
         when(cityService.getCityById(anyInt()))
@@ -128,6 +137,7 @@ public class CityControllerWebTests {
     }
 
     @Test
+    @WithMockUser(username = "admin", authorities={"ROLE_ADMIN"})
     @DisplayName("Given a delete request for a city which exists, return ok status")
     void givenADeleteRequestForACityWhichExistsReturnOkStatus() throws Exception {
         CityEntity returnedCity = new CityEntity();
@@ -140,6 +150,7 @@ public class CityControllerWebTests {
     }
 
     @Test
+    @WithMockUser(username = "admin", authorities={"ROLE_ADMIN"})
     @DisplayName("Given a delete request for a city which don't exists, return bad request status")
     void givenADeleteRequestForACityWhichDonTExistsReturnBadRequestStatus() throws Exception {
         when(cityService.getCityById(anyInt()))
