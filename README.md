@@ -4,7 +4,7 @@ World-DB-Spring-MVC team consisting of Howard, Patryk S, Selam, Mamoon, Alastair
 ## Project Overview
 This project creates a Java applicaiton that uses an SQL database which contains a list of countries and cities, along with other details.
 This applicaiton allows users to query certain fields within the database, while following the spring architecture layout: Entities->Repository->Service->Controller
-We implement RestAPIs and endpoints to allow the following CRUD methods.
+We have implemented RestAPIs and endpoints to allow the following CRUD methods while providing each page with stylized and user friendly design.
 
 - POST /city: Adds a new city.
 - GET /cities: Retrieves all cities.
@@ -16,14 +16,10 @@ We implement RestAPIs and endpoints to allow the following CRUD methods.
 
 ## Acceptance Criteria
 - Interact with the MySQL World Database
-- Use Spring JPA to connect and communicate with the Database
-- Use basic CRUD operations
-- Provide multiple types of search methods
-- Implement the service layer in your application
-- Tested with WebMVCTests
-- GUI to be provided via swaggar
-- Secure endpoints wiht an API
-- Error handling of API endpoints
+- Application allows user to view,add, update and delete from the 3 SQL tables
+- Use Tailwind to develop the frontend of the site
+- Use Spring security to secure the application.
+- Tested with WebMVCTests and MockMVCTests
 
 
 ## Dependencies
@@ -54,6 +50,26 @@ spring.jpa.hibernate.naming.physical-strategy=org.hibernate.boot.model.naming.Ph
 
 ```
 
+In addition to ensuring your databse is correctly connected to, please make sure to run this script to ensure you have the user tables.
+
+```
+create table if not exists users
+(
+    id        bigint       not null
+        primary key,
+    password  varchar(255) null,
+    roles     varchar(255) null,
+    user_name varchar(255) null
+);
+
+create table if not exists users_seq
+(
+    next_val bigint null
+);
+
+insert into users_seq (next_val) values (1);
+```
+
 ## How to use the Program 
 Open the program and run the main method.
 
@@ -61,7 +77,7 @@ Open up browser and access your localhost
 ```
 http://localhost:8080/
 ```
-From here you can access all our endpoints.
+From here you can access all our endpoints from the user interface.
 
 
 ##  
